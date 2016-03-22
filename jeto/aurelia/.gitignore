@@ -1,4 +1,4 @@
-jspm_packages
 node_modules
+jspm_packages
 config.js
-
+export
