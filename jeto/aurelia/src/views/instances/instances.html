@@ -1,0 +1,98 @@
+<template>
+  <require from="common/custom-select/custom-select"></require>
+  <require from="common/modal/modal"></require>
+  <require from="common/modal/modal-header"></require>
+  <require from="common/modal/modal-body"></require>
+  <require from="common/modal/modal-footer"></require>
+
+  <div class="container">
+    <div class="well well-sm bg-purple header"><h3>Instances</h3></div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="input-group">
+          <span class="input-group-addon" id="search-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+          <input type="text" class="form-control" placeholder="Search" aria-describedby="search-addon">
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <custom-select name="environment" selected.bind="defaultEnvironment" options.bind="environmentOptions" change.delegate="changeEnvironment($event)"></custom-select>
+      </div>
+      <div class="col-sm-2">
+        <custom-select name="project" selected.bind="defaultProject" options.bind="projectOptions" change.delegate="changeProject($event)"></custom-select>
+      </div>
+      <div class="col-sm-2">
+        <custom-select name="host" selected.bind="defaultHost" options.bind="hostOptions" change.delegate="changeHost($event)"></custom-select>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn bg-purple btn-flat pull-right" click.delegate="showCreateMachineModal()">
+          <span class="button-text">Create a new machine</span>
+          <span class="fa fa-fw fa-server"></span>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12"><br></div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Project</th>
+              <th>Hosts</th>
+              <th>Path</th>
+              <th>Git Reference</th>
+              <th>Environment</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr repeat.for="instance of instances">
+              <td><a href="instances/${instance.id}">${instance.name}</a></td>
+              <td>${instance.project.name}</td>
+              <td>${instance.host.name}</td>
+              <td>${instance.path}</td>
+              <td>${instance.git_reference}</td>
+              <td>${instance.environment}</td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal
+  <div id="machine-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  -->
+
+  <!-- Create new machine modal-->
+  <modal id="machine-modal">
+    <modal-header title="Edit Person"></modal-header>
+    <modal-body   id="machine-modal" content="views/add-machine/add-machine"></modal-body>
+    <modal-footer id="machine-modal" buttons.bind="[{label:'Cancel',class:'btn-link'},{label:'Save', class:'btn-primary'}]"></modal-footer>
+  </modal>
+
+
+</template>

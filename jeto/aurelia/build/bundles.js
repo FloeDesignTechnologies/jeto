@@ -31,10 +31,10 @@ module.exports = {
         "aurelia-loader-default",
         "aurelia-history-browser",
         "aurelia-logging-console",
-        "bootstrap/css/bootstrap.css!text",
+        "aurelia-event-aggregator",
         "admin-lte/dist/css/AdminLTE.css!text",
-        "admin-lte/dist/css/skins/skin-blue.css!text"
-
+        "admin-lte/bootstrap/css/bootstrap.css!text",
+        "admin-lte/dist/css/skins/skin-blue.css!text",
       ],
       "options": {
         "inject": true,
@@ -46,7 +46,6 @@ module.exports = {
     "dist/common/lib": {
       "includes": [
         "jquery",
-        "bootstrap",
         "admin-lte"
       ],
       "options": {

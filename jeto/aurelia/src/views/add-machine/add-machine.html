@@ -1,0 +1,60 @@
+<template>
+  <require from="common/custom-select/custom-select"></require>
+  <require from="views/add-machine/add-machine.css"></require>
+
+  <form>
+    <div class="form-group">
+      <label for="Project">Project</label>
+      <custom-select name="project" selected.bind="defaultProject" options.bind="projectOptions" change.delegate="changeProject($event)"></custom-select>
+    </div>
+    <div class="form-group">
+      <label for="host">Host</label>
+      <custom-select name="host" selected.bind="defaultHost" options.bind="hostOptions" change.delegate="changeHost($event)"></custom-select>
+    </div>
+    <div class="form-group">
+      <label for="environment">Environment</label>
+      <custom-select name="environment" selected.bind="defaultEnvironment" options.bind="environmentOptions" change.delegate="changeEnvironment($event)"></custom-select>
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" name="name" class="form-control" placeholder="Machine name" value.bind="name">
+    </div>
+
+    <div class="row" hide.bind="showGitReference">
+      <div class="col-sm-12">
+        <span class="empty-project-notice text-blue">Please select a project in order to configure it.<span>
+      </div>
+    </div>
+
+    <div class="nav-tabs-custom" show.bind="showGitReference">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#git" data-toggle="tab" aria-expanded="true">Git</a></li>
+        <li class=""><a href="#url"       data-toggle="tab" aria-expanded="false">Download an archive</a></li>
+      </ul>
+      <div class="tab-content tab-content-add-machine">
+        <div class="tab-pane active" id="git">
+          <div class="row">
+            <div class="col-sm-6">
+              <span><strong>Git reference</strong></span>
+            </div>
+            <div class="col-sm-6">
+              <button class="btn btn-default pull-right"><span class="glyphicon glyphicon-refresh ${ isLoading ? 'fa-spin' : '' }"></span></button>
+            </div>
+          </div>
+          <div class="row select-git-row">
+            <div class="col-sm-12">
+              <custom-select name="git" selected.bind="defaultGit" options.bind="gitReferenceOptions" change.delegate="changeReferenceGit($event)"></custom-select>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="url">
+          <div class="form-group">
+            <label for="archive-url">Enter the URL to download an archive (zip or tgz)</label>
+            <input id="archive-url" name="archive-url" class="form-control" placeholder="archive-url" value.bind="archiveUrl">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</template>
