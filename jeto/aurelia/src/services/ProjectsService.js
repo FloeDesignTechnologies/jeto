@@ -16,7 +16,12 @@ export class ProjectsService {
 
   getGitReferenceList(projectID) {
     // TO BE IMPLEMENTED
-    return this.gitReferenceList[projectID];
+    if( this.gitReferenceList[projectID] ) {
+      return this.gitReferenceList[projectID].gitReferences;
+    }
+    else {
+     return [];
+    }
   }
 
   gitReferenceList = {

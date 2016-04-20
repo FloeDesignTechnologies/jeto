@@ -13,4 +13,5 @@ export function configure(aurelia) {
   //aurelia.use.plugin('aurelia-html-import-template-loader')
 
   aurelia.start().then(() => aurelia.setRoot());
+
 }

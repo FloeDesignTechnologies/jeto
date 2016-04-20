@@ -366,7 +366,8 @@ System.config({
       "services/ProjectsService",
       "services/HostsService",
       "aurelia-event-aggregator",
-      "common/modal/modal"
+      "common/modal/modal",
+      "jquery"
     ],
     "views/instances/instances.js": [
       "aurelia-framework",

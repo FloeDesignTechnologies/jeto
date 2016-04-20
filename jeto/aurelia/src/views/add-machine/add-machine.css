@@ -9,3 +9,20 @@
 .empty-project-notice {
     font-size: 1.3em;
 }
+
+
+.btn-loading {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-loading.loading {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #8c8c8c;
+}
+.btn-loading:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}

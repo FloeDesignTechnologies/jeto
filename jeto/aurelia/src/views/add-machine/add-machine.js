@@ -4,6 +4,7 @@ import {ProjectsService}  from 'services/ProjectsService';
 import {HostsService}     from 'services/HostsService';
 import {EventAggregator}  from 'aurelia-event-aggregator';
 import {Modal}            from 'common/modal/modal';
+import $                  from 'jquery';
 
 @inject(EventAggregator, InstancesService,ProjectsService, HostsService)
 export class AddMachine {
@@ -20,10 +21,14 @@ export class AddMachine {
 
     this.showGitReference = false;
     this.isLoading = false;
+    this.showError = false;
+    this.showSuccess = false;
+    this.showLoading = false;
   }
 
   activate(id) {
     this.id = id;
+    this.activeTab = "git";
     // Environment dropdown
     this.environmentOptions = [
       {label: 'Choose a Environments', value: ''},
@@ -41,7 +46,7 @@ export class AddMachine {
     }
     this.defaultProject = this.projectOptions[0];
 
-    // hosts dropdown
+    // Hosts dropdown
     this.hostOptions = [{ label:"Choose a Hosts", value:""}];
     for( let host of this.hosts) {
       this.hostOptions.push({ label:host.name, value:host.id});
@@ -50,58 +55,135 @@ export class AddMachine {
     this.eventAggregator.subscribe(Modal.SaveModalEvent, response => {
       this.saveData(response);
     });
+    this.setGitReferenceList();
   }
 
   saveData(response) {
+    this.showError = false;
     if( response.id != this.id ) {
       return;
     }
+    let data = this.validateForm();
+    if( data.error ) {
+      this.showError = true;
+      this.errors = data.errors;
+      this.errorTitle = "Please fix those errors";
+    }
+    else {
+      this.showLoading = true;
+      setTimeout( () => {
+        this.showSuccess = true;
+        this.showLoading = false;
+      },2000);
+    }
+s  }
 
-    this.eventAggregator.publish(Modal.CloseModalEvent, {id:this.name});
-
+  setActiveTab(activeTab) {
+    this.activeTab = activeTab;
   }
-  
-  updateGitProjectList() {
-    let gitReferences = this.projectService.getGitReferenceList(this.project).gitReferences;
+
+  validateForm() {
+    let data = {};
+    data.errors = [];
+
+    data.project = this.project;
+    if( !data.project ) {
+      data.error = true;
+      data.errors.push("Please choose a project");
+    }
+
+    data.host = this.host;
+    if( !data.host ) {
+      data.error = true;
+      data.errors.push("Please choose an host");
+    }
+
+    data.environment = this.environment;
+    if( !data.environment ) {
+      data.error = true;
+      data.errors.push("Please choose an environment");
+    }
+
+    data.name = this.name;
+    if( !data.name ) {
+      data.error = true;
+      data.errors.push("Please choose a machine name");
+    }
+
+    if (this.activeTab == "git") {
+      data.gitReference = this.gitReference;
+      if (!data.gitReference) {
+        data.error = true;
+        data.errors.push("Please choose a git reference");
+      }
+    }
+    else {
+      data.archiveUrl   = this.archiveUrl;
+      if (!this.archiveUrl) {
+        data.error = true;
+        data.errors.push("Please choose an archive url");
+      }
+    }
+    return data;
+  }
+
+  setGitReferenceList() {
+    if( !this.project ) return;
+    let gitReferences = this.projectService.getGitReferenceList(this.project);
     this.showGitReference = false;
-    if(gitReferences) {
+    if(gitReferences.length) {
       this.showGitReference = true;
     }
-
-    this.gitReferenceOptions = [];
+    var options = [{ label:"Choose a Git Reference", value:"" }];
     for( let gitReference of gitReferences) {
-      this.gitReferenceOptions.push({ label:gitReference, value:gitReference});
+      options.push({ label:gitReference, value:gitReference});
     }
-    
+    this.gitReferenceOptions = options;
+    setTimeout( ()=> {
+      $("#gitReference").val("").trigger("change");
+    }, 10 );
+
+  }
+
+  refreshGitReferencesList(evt) {
+    $(evt.target).blur();
+    this.isLoading = true;
+    this.setGitReferenceList();
+    setTimeout( () => {
+      this.isLoading = false;
+    }, 500);
   }
 
   changeEnvironment(evt) {
-    // The selected value will be printed out to the browser console
     this.environment = evt.detail.value;
-    console.log(evt.detail.value);
   }
 
   changeProject(evt) {
-    // The selected value will be printed out to the browser console
     this.project = evt.detail.value;
-    this.updateGitProjectList(this.project);
-    console.log(evt.detail.value);
+    if(!this.project) {
+      this.showGitReference = false;
+    }
+    this.setGitReferenceList();
   }
 
   changeHost(evt) {
-    // The selected value will be printed out to the browser console
-    this.project = evt.detail.value;
-    console.log(evt.detail.value);
-  }
-
-  changeReferenceGit(evt) {
-    // The selected value will be printed out to the browser console
-    this.referenceGit = evt.detail.value;
-    console.log("changeReferenceGit: ",evt);
+    this.host = evt.detail.value;
   }
 
   showCreateMachineModal() {
     this.eventAggregator.publish(Modal.ShowModalEvent, {id:"machine-modal", title:"Create a new machine"});
+  }
+
+  changeReferenceGit(evt) {
+    this.gitReference = evt.detail.value;
+  }
+
+  closeSuccessAlert() {
+    this.showSuccess = false;
+  }
+  
+  closeErrorAlert() {
+    this.showError = false;
   }
 
 }

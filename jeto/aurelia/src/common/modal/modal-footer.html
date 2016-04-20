@@ -1,5 +1,5 @@
 <template>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default ${button.class}" repeat.for="button of buttons" click.delegate="onButtonClick(button.label)">${button.label}</button>
+    <button type="button" id="${button.id}" class="btn btn-default ${button.class}" repeat.for="button of buttons" click.delegate="onButtonClick(button.label)">${button.label}</button>
   </div>
 </template>
