@@ -35,6 +35,8 @@ module.exports = {
         "admin-lte/dist/css/AdminLTE.css!text",
         "admin-lte/bootstrap/css/bootstrap.css!text",
         "admin-lte/dist/css/skins/skin-blue.css!text",
+        "select2",
+        "select2/css/select2.css!text"
       ],
       "options": {
         "inject": true,

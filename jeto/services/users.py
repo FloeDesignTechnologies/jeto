@@ -45,10 +45,7 @@ class UserApi(RestrictedResource):
     def get(self, id=None):
         if id is None:
             users = User.query.order_by('name')
-            return {
-                'users': map(lambda t: marshal(t, user_fields_with_teams),
-                             users),
-            }
+            return [marshal(user, user_fields_with_teams) for user in users]
         else:
             user = User.query.get(id)
             if user == current_user:
@@ -58,9 +55,9 @@ class UserApi(RestrictedResource):
                         'api_keys': fields.Nested(api_key_fields)
                     }
                 )
-                return {'user': marshal(user, user_fields_with_keys)}
+                return marshal(user, user_fields_with_keys)
             else:
-                return {'user': marshal(user, user_fields_with_teams)}
+                return marshal(user, user_fields_with_teams)
 
     @admin_authenticate
     def post(self, id=None):
@@ -93,9 +90,7 @@ class UserApi(RestrictedResource):
             db.session.add(user)
             db.session.commit()
 
-        return {
-            'user': marshal(user, user_fields),
-        }
+        return marshal(user, user_fields)
 
     @admin_authenticate
     def delete(self, id):

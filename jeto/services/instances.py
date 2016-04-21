@@ -54,9 +54,7 @@ class InstancesApi(Resource):
     def get(self):
         instances = self.backend.get_all_instances()
 
-        return {
-            'instances': map(lambda t: marshal(t, instance_fields), instances),
-        }
+        return [marshal(instance, instance_fields) for instance in instances]
 
     def delete(self):
         instance_id = int(request.json['id'])
@@ -88,9 +86,7 @@ class InstancesApi(Resource):
         else:
             return self.get()
 
-        return {
-            'instance': marshal(instance, instance_fields),
-        }
+        return marshal(instance, instance_fields);
 
     def _sync(self, id):
         self.backend.sync(id)

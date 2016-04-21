@@ -25,9 +25,7 @@ class TeamApi(RestrictedResource):
     def get(self, id=None):
         if id is None:
             teams = Team.query.order_by('name')
-            return {
-                'teams': map(lambda t: marshal(t, team_fields), teams),
-            }
+            return [marshal(team, team_fields) for team in teams]
         else:
             team = Team.query.get(id)
             return marshal(team, team_fields)
@@ -46,9 +44,7 @@ class TeamApi(RestrictedResource):
                 request_details=request.json)
             db.session.add(team)
             db.session.commit()
-            return {
-                'team': marshal(team, team_fields),
-            }
+            return self.get(team.id)
         else:
             # Not used right now, put() is called instead.
             team = Team.query.get(id)

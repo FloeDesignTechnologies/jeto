@@ -9,7 +9,7 @@ var resources = require('../export.js');
 // deletes all files in the output path
 gulp.task('clean-export', function() {
   return gulp.src([paths.exportSrv])
-    .pipe(vinylPaths(del));
+    .pipe(vinylPaths(del([paths.exportSrv], {force:true})));
 });
 
 function getBundles() {

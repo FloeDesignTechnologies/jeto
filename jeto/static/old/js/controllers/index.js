@@ -1,4 +1,0 @@
-/* Controllers */
-
-function IndexController($scope) {
-}
