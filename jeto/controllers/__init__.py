@@ -75,7 +75,7 @@ from jeto.core import api
 
 from jeto.services.auditlog import AuditlogApi
 from jeto.services.domains import DomainsApi, DomainControllerApi
-from jeto.services.hosts import HostApi
+from jeto.services.hosts import HostApi, HostsApi
 from jeto.services.htpasswords import HtpasswordApi, HtpasswordListApi
 from jeto.services.instances import InstanceApi, InstancesApi, CommandApi
 from jeto.services.projects import ProjectApi
@@ -84,8 +84,9 @@ from jeto.services.teams import TeamApi
 from jeto.services.users import UserApi, CurrentUserApi
 from jeto.services.api_keys import APIKeyApi
 
-api.add_resource(InstanceApi, '/api/instances/<int:id>', endpoint='instance')
+api.add_resource(InstanceApi, '/api/instance/<int:id>', endpoint='instance')
 api.add_resource(InstancesApi, '/api/instances', endpoint='instances')
+api.add_resource(InstanceApi, '/api/instance', endpoint='instance_creation')
 api.add_resource(InstanceApi, '/api/instances/<int:id>/<machineName>/ip',
                  endpoint='machines')
 
@@ -109,8 +110,9 @@ api.add_resource(HtpasswordListApi, '/api/htpassword/<slug>',
 api.add_resource(ProjectApi, '/api/projects', endpoint='projects')
 api.add_resource(ProjectApi, '/api/projects/<int:id>')
 
-api.add_resource(HostApi, '/api/hosts', endpoint='hosts')
-api.add_resource(HostApi, '/api/hosts/<int:id>')
+api.add_resource(HostsApi, '/api/hosts', endpoint='hosts')
+api.add_resource(HostApi, '/api/host', endpoint='host')
+api.add_resource(HostApi, '/api/host/<int:id>')
 
 api.add_resource(TeamApi, '/api/teams', endpoint='teams')
 api.add_resource(TeamApi, '/api/teams/<int:id>')

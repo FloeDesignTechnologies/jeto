@@ -19,73 +19,72 @@ host_fields = {
     'params': fields.String,
 }
 
+class HostsApi(RestrictedResource):
+    def get(self):
+        hosts_all = Host.query.order_by('name')
+        permitted_hosts = []
+        for host in hosts_all:
+            if current_user.has_permission(ViewHostPermission, host.id):
+                permitted_hosts.append(host)
+
+        return [marshal(host, host_fields) for host in permitted_hosts]
 
 class HostApi(RestrictedResource):
-    def get(self, id=None):
-        if id is None:
-            hosts_all = Host.query.order_by('name')
-            permitted_hosts = []
-            for host in hosts_all:
-                if current_user.has_permission(ViewHostPermission, host.id):
-                    permitted_hosts.append(host)
+    def get(self, id):
+        host = Host.query.get_or_404(id)
+        host.params = host.params.replace('\r\n', '<br>')
+        host.params = host.params.replace('\n', '<br>')
 
-            return [marshal(host, host_fields) for host in permitted_hosts]
-        else:
-            host = Host.query.get(id)
-            host.params = host.params.replace('\r\n', '<br>')
-            host.params = host.params.replace('\n', '<br>')
-
-            return marshal(host, host_fields)
+        return marshal(host, host_fields)
 
     @admin_authenticate
-    def post(self, id=None):
-        if 'state' in request.json and request.json['state'] == 'create':
-            host = Host(
-                None,
-                clean(request.json['name']),
-                request.json['params'].replace("<br>", "\r\n"),
-                clean(request.json['provider'])
-            )
-            auditlog(
-                current_user,
-                'create host',
-                host,
-                request_details=request.get_json())
-            db.session.add(host)
-            db.session.commit()
-            return {
-                'host': marshal(host, host_fields),
-            }
-        else:
-            host = Host.query.get(id)
-            auditlog(
-                current_user,
-                'update host',
-                host,
-                request_details=request.get_json())
-            name = clean(request.json['name'].rstrip())
+    def post(self):
+        host = Host(
+            None,
+            clean(request.json['name']),
+            request.json['params'].replace("<br>", "\r\n"),
+            clean(request.json['provider'])
+        )
+        auditlog(
+            current_user,
+            'create host',
+            host,
+            request_details=request.get_json())
+        db.session.add(host)
+        db.session.commit()
+        return marshal(host, host_fields)
 
-            params = request.json['params']
-            while params.find('<br><br>') != -1:
-                params = params.replace("<br><br>", "<br>")
+    @admin_authenticate
+    def put(self, id):
+        host = Host.query.get(id)
+        auditlog(
+            current_user,
+            'update host',
+            host,
+            request_details=request.get_json())
+        name = clean(request.json['name'].rstrip())
 
-            params = params.replace("<br>", "\r\n")
-            params = params.replace('<div>', '\r\n')
-            params = params.replace('&nbsp;', '')
-            params = params.replace('</div>', '\r\n')
+        params = request.json['params']
+        while params.find('<br><br>') != -1:
+            params = params.replace("<br><br>", "<br>")
 
-            provider = clean(request.json['provider'].rstrip())
+        params = params.replace("<br>", "\r\n")
+        params = params.replace('<div>', '\r\n')
+        params = params.replace('&nbsp;', '')
+        params = params.replace('</div>', '\r\n')
 
-            if name != '':
-                host.name = name
-            if provider != '':
-                host.provider = provider
+        provider = clean(request.json['provider'].rstrip())
 
-            host.params = params
+        if name != '':
+            host.name = name
+        if provider != '':
+            host.provider = provider
 
-            db.session.add(host)
-            db.session.commit()
-            return self.get(id)
+        host.params = params
+
+        db.session.add(host)
+        db.session.commit()
+        return self.get(id)
 
     @admin_authenticate
     def delete(self, id):
