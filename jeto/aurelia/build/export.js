@@ -12,6 +12,8 @@ module.exports = {
     "jspm_packages/npm/admin-lte@2.3.3/bootstrap/fonts/*",
     "jspm_packages/github/github/fetch@0.11.0.js",
     "jspm_packages/github/github/fetch@0.11.0/fetch.js",
-
+    "jspm_packages/npm/core-js@2.0.3/**",
+    "dist/app-build-*.js",
+    "dist/aurelia-*.js"
   ]
 };

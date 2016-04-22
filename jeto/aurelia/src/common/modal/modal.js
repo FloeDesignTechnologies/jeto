@@ -19,10 +19,10 @@ export class Modal {
   attached() {
     this.modal = $(this.element).find('.modal');
 
-    this.eventAggregator.subscribe(Modal.ShowModalEvent, response => {
+    this.eventAggregator.subscribe(Modal.ShowModalEvent, (response) => {
       this.showModal(response);
     });
-    this.eventAggregator.subscribe(Modal.CloseModalEvent, response => {
+    this.eventAggregator.subscribe(Modal.CloseModalEvent, (response) => {
       this.closeModal(response);
     });
 

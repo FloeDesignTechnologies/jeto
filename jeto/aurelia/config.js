@@ -185,76 +185,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   },
-  depCache: {
-    "npm:admin-lte@2.3.3.js": [
-      "npm:admin-lte@2.3.3/dist/js/app.min"
-    ],
-    "github:components/jquery@2.2.1.js": [
-      "github:components/jquery@2.2.1/jquery"
-    ],
-    "common/custom-select/custom-select.js": [
-      "aurelia-framework",
-      "jquery",
-      "select2"
-    ],
-    "common/modal/modal-body.js": [
-      "aurelia-framework"
-    ],
-    "common/modal/modal-footer.js": [
-      "aurelia-framework",
-      "common/modal/modal",
-      "aurelia-event-aggregator"
-    ],
-    "common/modal/modal-header.js": [
-      "aurelia-framework",
-      "aurelia-event-aggregator",
-      "common/modal/modal"
-    ],
-    "common/modal/modal.js": [
-      "aurelia-framework",
-      "aurelia-event-aggregator",
-      "jquery"
-    ],
-    "services/HostsService.js": [
-      "fetch",
-      "aurelia-fetch-client",
-      "aurelia-framework"
-    ],
-    "services/InstancesService.js": [
-      "fetch",
-      "aurelia-fetch-client",
-      "aurelia-framework"
-    ],
-    "services/ProjectsService.js": [
-      "fetch",
-      "aurelia-fetch-client",
-      "aurelia-framework"
-    ],
-    "views/add-machine/add-machine.js": [
-      "aurelia-framework",
-      "services/InstancesService",
-      "services/ProjectsService",
-      "services/HostsService",
-      "aurelia-event-aggregator",
-      "common/modal/modal",
-      "jquery"
-    ],
-    "views/instances/instances.js": [
-      "aurelia-framework",
-      "aurelia-event-aggregator",
-      "services/InstancesService",
-      "services/ProjectsService",
-      "services/HostsService",
-      "common/modal/modal"
-    ]
-  },
   bundles: {
-    "common/lib.js": [
-      "github:components/jquery@2.2.1.js",
-      "github:components/jquery@2.2.1/jquery.js",
-      "npm:admin-lte@2.3.3.js",
-      "npm:admin-lte@2.3.3/dist/js/app.min.js"
-    ],
     "app-build.js": [
       "app.html!github:systemjs/plugin-text@0.0.7.js",
       "app.js",
@@ -263,6 +194,7 @@ System.config({
       "common/custom-select/custom-select.js",
       "common/modal/modal-body.html!github:systemjs/plugin-text@0.0.7.js",
       "common/modal/modal-body.js",
+      "common/modal/modal-event.js",
       "common/modal/modal-footer.html!github:systemjs/plugin-text@0.0.7.js",
       "common/modal/modal-footer.js",
       "common/modal/modal-header.html!github:systemjs/plugin-text@0.0.7.js",
@@ -290,9 +222,13 @@ System.config({
     "aurelia.js": [
       "github:components/jquery@2.2.1.js",
       "github:components/jquery@2.2.1/jquery.js",
+      "github:twbs/bootstrap@3.3.6.js",
+      "github:twbs/bootstrap@3.3.6/js/bootstrap.js",
+      "npm:admin-lte@2.3.3.js",
       "npm:admin-lte@2.3.3/bootstrap/css/bootstrap.css!github:systemjs/plugin-text@0.0.7.js",
       "npm:admin-lte@2.3.3/dist/css/AdminLTE.css!github:systemjs/plugin-text@0.0.7.js",
       "npm:admin-lte@2.3.3/dist/css/skins/skin-blue.css!github:systemjs/plugin-text@0.0.7.js",
+      "npm:admin-lte@2.3.3/dist/js/app.min.js",
       "npm:aurelia-animator-css@1.0.0-beta.1.2.0.js",
       "npm:aurelia-animator-css@1.0.0-beta.1.2.0/aurelia-animator-css.js",
       "npm:aurelia-binding@1.0.0-beta.1.3.0.js",
@@ -378,6 +314,63 @@ System.config({
       "npm:select2@4.0.2.js",
       "npm:select2@4.0.2/css/select2.css!github:systemjs/plugin-text@0.0.7.js",
       "npm:select2@4.0.2/js/select2.js"
+    ]
+  },
+  depCache: {
+    "common/custom-select/custom-select.js": [
+      "aurelia-framework",
+      "jquery",
+      "select2"
+    ],
+    "common/modal/modal-body.js": [
+      "aurelia-framework"
+    ],
+    "common/modal/modal-footer.js": [
+      "aurelia-framework",
+      "common/modal/modal",
+      "aurelia-event-aggregator"
+    ],
+    "common/modal/modal-header.js": [
+      "aurelia-framework",
+      "aurelia-event-aggregator",
+      "common/modal/modal"
+    ],
+    "common/modal/modal.js": [
+      "aurelia-framework",
+      "aurelia-event-aggregator",
+      "jquery"
+    ],
+    "services/HostsService.js": [
+      "fetch",
+      "aurelia-fetch-client",
+      "aurelia-framework"
+    ],
+    "services/InstancesService.js": [
+      "fetch",
+      "aurelia-fetch-client",
+      "aurelia-framework"
+    ],
+    "services/ProjectsService.js": [
+      "fetch",
+      "aurelia-fetch-client",
+      "aurelia-framework"
+    ],
+    "views/add-machine/add-machine.js": [
+      "aurelia-framework",
+      "services/InstancesService",
+      "services/ProjectsService",
+      "services/HostsService",
+      "aurelia-event-aggregator",
+      "common/modal/modal",
+      "jquery"
+    ],
+    "views/instances/instances.js": [
+      "aurelia-framework",
+      "aurelia-event-aggregator",
+      "services/InstancesService",
+      "services/ProjectsService",
+      "services/HostsService",
+      "common/modal/modal"
     ]
   }
 });

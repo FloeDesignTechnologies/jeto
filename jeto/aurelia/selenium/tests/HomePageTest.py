@@ -11,7 +11,7 @@ class HomePageTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost:9000"
+        self.base_url = "http://localhost/static"
         self.verificationErrors = []
         self.accept_next_alert = True
     

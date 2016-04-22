@@ -11,7 +11,7 @@ class InstancePageCreateMachineTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(1)
-        self.base_url = "localhost:9000"
+        self.base_url = "localhost/static"
         self.verificationErrors = []
         self.accept_next_alert = True
     

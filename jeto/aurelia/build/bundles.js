@@ -32,28 +32,18 @@ module.exports = {
         "aurelia-history-browser",
         "aurelia-logging-console",
         "aurelia-event-aggregator",
+        "bootstrap",
+        "admin-lte",
         "admin-lte/dist/css/AdminLTE.css!text",
-        "admin-lte/bootstrap/css/bootstrap.css!text",
         "admin-lte/dist/css/skins/skin-blue.css!text",
+        "admin-lte/bootstrap/css/bootstrap.css!text",
         "select2",
-        "select2/css/select2.css!text"
+        "select2/css/select2.css!text",
       ],
       "options": {
         "inject": true,
         "minify": true,
         "depCache": false,
-        "rev": false
-      }
-    },
-    "dist/common/lib": {
-      "includes": [
-        "jquery",
-        "admin-lte"
-      ],
-      "options": {
-        "inject": true,
-        "minify": false,
-        "depCache": true,
         "rev": false
       }
     }
