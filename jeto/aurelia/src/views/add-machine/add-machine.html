@@ -1,0 +1,76 @@
+<template>
+  <require from="common/custom-select/custom-select"></require>
+  <require from="views/add-machine/add-machine.css"></require>
+
+  <div id="loadingMessage" class="alert alert-default" show.bind="showLoading">
+    <h3 class="text-blue alert-header"><span class="glyphicon glyphicon-refresh fa-spin"></span><span class="saving-text">Saving</span></h3>
+  </div>
+
+  <div id="successMessage" class="alert alert-default" show.bind="showSuccess">
+    <button type="button" class="close" aria-hidden="true" click.delegate="closeSuccessAlert()">×</button>
+    <h3 class="text-green alert-header">Machine successfully created.</h3>
+  </div>
+
+  <div id="errorMessage" class="alert alert-default" show.bind="showError">
+    <button type="button" class="close" aria-hidden="true" click.delegate="closeErrorAlert()">×</button>
+    <h3 class="text-red alert-header"><span class="icon fa fa-warning"></span>${errorTitle}</h3>
+      <span repeat.for="error of errors" class="text-red">${error}<br></span>
+  </div>
+  <form>
+    <div class="form-group">
+      <label for="Project">Project</label>
+      <custom-select name="project-machine" selected.bind="defaultProject" options.bind="projectOptions" change.delegate="changeProject($event)"></custom-select>
+    </div>
+    <div class="form-group">
+      <label for="host">Host</label>
+      <custom-select name="host-machine" selected.bind="defaultHost" options.bind="hostOptions" change.delegate="changeHost($event)"></custom-select>
+    </div>
+    <div class="form-group">
+      <label for="environment">Environment</label>
+      <custom-select name="environment-machine" selected.bind="defaultEnvironment" options.bind="environmentOptions" change.delegate="changeEnvironment($event)"></custom-select>
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" name="name" class="form-control" placeholder="Machine name" value.bind="name">
+    </div>
+
+    <div class="row" id="emptyProjectMessage" hide.bind="showGitReference">
+      <div class="col-sm-12">
+        <span class="empty-project-notice text-blue">Please select a project in order to configure it.<span>
+      </div>
+    </div>
+
+    <div class="nav-tabs-custom" id="gitReferencePanel" show.bind="showGitReference">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#git" data-toggle="tab" aria-expanded="true"  click.delegate="setActiveTab('git')">Git</a></li>
+        <li class=""><a href="#url"       data-toggle="tab" aria-expanded="false" click.delegate="setActiveTab('archive')">Download an archive</a></li>
+      </ul>
+      <div class="tab-content tab-content-add-machine">
+        <div class="tab-pane active" id="git">
+          <div class="row">
+            <div class="col-sm-6">
+              <span><strong>Git reference</strong></span>
+            </div>
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-loading ${ isLoading ? 'loading' : '' } pull-right" click.delegate="refreshGitReferencesList($event)">
+                <span class="glyphicon glyphicon-refresh ${ isLoading ? 'fa-spin' : '' }"></span>
+              </button>
+            </div>
+          </div>
+          <div class="row select-git-row">
+            <div class="col-sm-12">
+              <custom-select name="gitReference" selected.bind="defaultGitReference" options.bind="gitReferenceOptions" change.delegate="changeReferenceGit($event)"></custom-select>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="url">
+          <div class="form-group">
+            <label for="archive-url">Enter the URL to download an archive (zip or tgz)</label>
+            <input id="archive-url" name="archive-url" class="form-control" placeholder="archive-url" value.bind="archiveUrl">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</template>

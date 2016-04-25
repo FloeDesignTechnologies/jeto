@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://jeto.io:9000/" />
+<title>New Test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">New Test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>#/instances</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTitle</td>
+	<td>Instances | Ĵeto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.header h3</td>
+	<td>Instances</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=openCreateMachineButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=.modal.fade.au-target.in</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=.modal-title</td>
+	<td>Create a new machine</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>this.browserbot.getUserWindow().jQuery</td>
+	<td>jq</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=#emptyProjectMessage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#gitReferencePanel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#project-machine').val(&quot;18&quot;).trigger(&quot;change&quot;) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>css=#gitReferencePanel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>css=#emptyProjectMessage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#git.active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=#url.active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a[href=&quot;#url&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=#git.active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#url.active</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#project-machine').val(&quot;&quot;).trigger(&quot;change&quot;) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>id=errorMessage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.text-red</td>
+	<td>*choose a project*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[2]</td>
+	<td>*choose an host*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[3]</td>
+	<td>*choose an environment*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[4]</td>
+	<td>*choose a machine name*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[5]</td>
+	<td>*choose an archive url*</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=archive-url</td>
+	<td>test-url</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@id='errorMessage']/span[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#errorMessage &gt; button.close.au-target</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=errorMessage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=a[href=&quot;#git&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#project-machine').val(&quot;&quot;).trigger(&quot;change&quot;) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=span.text-red</td>
+	<td>*choose a project*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[2]</td>
+	<td>*choose an host*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[3]</td>
+	<td>*choose an environment*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[4]</td>
+	<td>*choose a machine name*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='errorMessage']/span[5]</td>
+	<td>*choose a git reference*</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#project-machine').val(&quot;18&quot;).trigger(&quot;change&quot;) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#host-machine').val(&quot;2&quot;).trigger(&quot;change&quot;) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#environment-machine').val(&quot;qa&quot;).trigger(&quot;change&quot;) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>Machine name test</td>
+</tr>
+<tr>
+	<td>runScript</td>
+	<td>$('#gitReference').val(&quot;master&quot;).trigger(&quot;change&quot;) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#errorMessage &gt; button.close.au-target</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[8]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=loadingMessage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>id=successMessage</td>
+	<td>4000</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.close.au-target</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>id=successMessage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#machine-modal .close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>css=.modal.fade.au-target.in</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,48 @@
+.home {
+    margin-top: 140px;
+}
+
+.header {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.header h3 {
+    margin-top: 13px;
+    margin-bottom: 7px;
+    margin-left: 9px;
+    font-weight: 700;
+}
+
+.button-text {
+    padding-right: 10px;
+}
+
+.button-link {
+    border: hidden !important;
+}
+
+.button-link:hover {
+    border: hidden !important;
+    background-color: inherit !important;
+    text-decoration: underline !important;
+    color: #3C8DBC !important;
+}
+
+.alert-default {
+    background-color: #FFFFFF;
+    color: #444;
+    border-color: #ddd;
+}
+
+.alert-header {
+    margin-top: -3px !important;
+}
+
+.alert-header .saving-text {
+    margin-left:10px;
+}
+
+.alert-header .fa-spin {
+    font-size: smaller;
+}

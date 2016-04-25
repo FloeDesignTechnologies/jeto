@@ -16,7 +16,7 @@ def index(**kwargs):
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('index.j2')
+    return render_template('/static/index.html')
 
 
 @app.route('/instances')

@@ -1,0 +1,7 @@
+<template>
+  <require from="select2/css/select2.css"></require>
+  <require from="common/custom-select/custom-select.css"></require>
+  <select id.bind="name" name.bind="name" value.two-way="selected" id.bind="name" style="width: 100%">
+    <option repeat.for="option of options" value.bind="option.value" ${option.selected}>${option.label}</option>
+  </select>
+</template>
