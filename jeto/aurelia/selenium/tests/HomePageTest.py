@@ -12,7 +12,7 @@ class HomePageTest(unittest.TestCase):
     def setUp(self):
         self.WAIT_TIME = 10;
         self.driver = webdriver.PhantomJS()
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(5)
         self.base_url = "http://localhost/static"
         self.verificationErrors = []
         self.accept_next_alert = True

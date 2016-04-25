@@ -9,8 +9,9 @@ import unittest, time, re
 
 class InstancePageCreateMachineTest(unittest.TestCase):
     def setUp(self):
+        self.WAIT_TIME = 10;
         self.driver = webdriver.PhantomJS()
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(5)
         self.base_url = "localhost/static"
         self.verificationErrors = []
         self.accept_next_alert = True
@@ -18,7 +19,7 @@ class InstancePageCreateMachineTest(unittest.TestCase):
     def test_instance_page_create_machine(self):
         driver = self.driver
         driver.get(self.base_url + "#/instances")
-        for i in range(5):
+        for i in range(self.WAIT_TIME):
             try:
                 if u"Instances | Ĵeto" == driver.title: break
             except: pass
@@ -26,12 +27,12 @@ class InstancePageCreateMachineTest(unittest.TestCase):
         else: self.fail("time out")
         self.assertEqual("Instances", driver.find_element_by_css_selector(".header h3").text)
         driver.find_element_by_id("openCreateMachineButton").click()
-        for i in range(5):
+        for i in range(self.WAIT_TIME):
             try:
                 if self.is_element_present(By.CSS_SELECTOR, ".modal.fade.au-target.in"): break
             except: pass
             time.sleep(1)
-        else: self.fail("time out")
+        else: self.fail("Modal display time out")
         time.sleep(1)
         self.assertEqual("Create a new machine", driver.find_element_by_css_selector(".modal-title").text)
         self.assertTrue(driver.find_element_by_css_selector("#emptyProjectMessage").is_displayed())
@@ -69,18 +70,18 @@ class InstancePageCreateMachineTest(unittest.TestCase):
         driver.execute_script(" $('#gitReference').val('master').trigger('change') ");
         driver.find_element_by_id("machine-modal-save").click()
         self.assertFalse(driver.find_element_by_id("errorMessage").is_displayed())
-        for i in range(5):
+        for i in range(self.WAIT_TIME):
             try:
                 if driver.find_element_by_id("loadingMessage").is_displayed(): break
             except: pass
             time.sleep(1)
-        else: self.fail("time out")
-        for i in range(5):
+        else: self.fail("Loading message time out")
+        for i in range(self.WAIT_TIME):
             try:
                 if driver.find_element_by_id("successMessage").is_displayed(): break
             except: pass
             time.sleep(1)
-        else: self.fail("time out")
+        else: self.fail("Success message time out")
         driver.find_element_by_css_selector("button.close.au-target").click()
         self.assertFalse(driver.find_element_by_id("successMessage").is_displayed())
         driver.find_element_by_css_selector("#machine-modal .close").click()
