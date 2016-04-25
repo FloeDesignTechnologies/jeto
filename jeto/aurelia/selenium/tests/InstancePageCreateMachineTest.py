@@ -9,7 +9,7 @@ import unittest, time, re
 
 class InstancePageCreateMachineTest(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.PhantomJS()
         self.driver.implicitly_wait(1)
         self.base_url = "localhost/static"
         self.verificationErrors = []

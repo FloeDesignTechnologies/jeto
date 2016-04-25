@@ -8,9 +8,11 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
 class HomePageTest(unittest.TestCase):
+
     def setUp(self):
-        self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(30)
+        self.WAIT_TIME = 10;
+        self.driver = webdriver.PhantomJS()
+        self.driver.implicitly_wait(10)
         self.base_url = "http://localhost/static"
         self.verificationErrors = []
         self.accept_next_alert = True
@@ -18,12 +20,12 @@ class HomePageTest(unittest.TestCase):
     def test_home_page(self):
         driver = self.driver
         driver.get(self.base_url + "/#")
-        for i in range(60):
+        for i in range(self.WAIT_TIME):
             try:
                 if u"Welcome | Ĵeto" == driver.title: break
             except: pass
             time.sleep(1)
-        else: self.fail("time out")
+        else: self.fail("time out: "+driver.title)
         self.assertTrue(self.is_element_present(By.LINK_TEXT, u"Ĵeto"))
         self.assertTrue(self.is_element_present(By.LINK_TEXT, "Instances"))
         self.assertTrue(self.is_element_present(By.LINK_TEXT, "Domains"))

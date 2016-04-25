@@ -1,6 +1,6 @@
 System.config({
   defaultJSExtensions: true,
-  transpiler: "none",
+  transpiler: false,
   paths: {
     "*": "dist/*",
     "github:*": "jspm_packages/github/*",
@@ -194,7 +194,6 @@ System.config({
       "common/custom-select/custom-select.js",
       "common/modal/modal-body.html!github:systemjs/plugin-text@0.0.7.js",
       "common/modal/modal-body.js",
-      "common/modal/modal-event.js",
       "common/modal/modal-footer.html!github:systemjs/plugin-text@0.0.7.js",
       "common/modal/modal-footer.js",
       "common/modal/modal-header.html!github:systemjs/plugin-text@0.0.7.js",
